@@ -1,0 +1,4 @@
+<map id="nvme_completion_poll_status" name="nvme_completion_poll_status">
+<area shape="rect" id="node2" href="$structnvme__completion.html" title="nvme_completion" alt="" coords="19,95,143,121"/>
+<area shape="rect" id="node3" href="$structnvme__status.html" title="nvme_status" alt="" coords="32,5,129,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="nvme_request" name="nvme_request">
+<area shape="rect" id="node2" href="$structnvme__completion.html" title="nvme_completion" alt="" coords="5,95,129,121"/>
+<area shape="rect" id="node3" href="$structnvme__status.html" title="nvme_status" alt="" coords="19,5,116,32"/>
+<area shape="rect" id="node4" href="$structnvme__command.html" title="nvme_command" alt="" coords="153,95,272,121"/>
+</map>

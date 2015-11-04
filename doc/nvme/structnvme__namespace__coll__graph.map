@@ -1,0 +1,7 @@
+<map id="nvme_namespace" name="nvme_namespace">
+<area shape="rect" id="node2" href="$structnvme__controller.html" title="nvme_controller" alt="" coords="275,141,389,168"/>
+<area shape="rect" id="node5" href="$structnvme__qpair.html" title="nvme_qpair" alt="" coords="532,280,621,307"/>
+<area shape="rect" id="node7" href="$structnvme__async__event__request.html" title="nvme_async_event_request" alt="" coords="484,141,669,168"/>
+<area shape="rect" id="node3" href="$structnvme__completion.html" title="nvme_completion" alt="" coords="23,231,147,257"/>
+<area shape="rect" id="node6" href="$structnvme__namespace__data.html" title="nvme_namespace_data" alt="" coords="5,141,165,168"/>
+</map>

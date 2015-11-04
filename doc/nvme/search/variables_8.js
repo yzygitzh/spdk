@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['nabo',['nabo',['../structnvme__namespace__data.html#a3087365581c0edabb6a370510b8deb79',1,'nvme_namespace_data']]],
+  ['nabsn',['nabsn',['../structnvme__namespace__data.html#ab274aa82e6de3de8c4e9fd949a97228d',1,'nvme_namespace_data']]],
+  ['nabspf',['nabspf',['../structnvme__namespace__data.html#a6f4e9a32b8477e70c6df411e2b2b5588',1,'nvme_namespace_data']]],
+  ['nacwu',['nacwu',['../structnvme__namespace__data.html#a12eca379ff1391e1a5d47f5e505fdf8f',1,'nvme_namespace_data']]],
+  ['nawun',['nawun',['../structnvme__namespace__data.html#a2105219d5d3b26ab2d05f18c51a1c9b2',1,'nvme_namespace_data']]],
+  ['nawupf',['nawupf',['../structnvme__namespace__data.html#aeea2f7d0e5183356d62b5bc765875ec1',1,'nvme_namespace_data']]],
+  ['ncap',['ncap',['../structnvme__namespace__data.html#a5cd8a4b2f45d6d92627cc8e26634601a',1,'nvme_namespace_data']]],
+  ['nguid',['nguid',['../structnvme__namespace__data.html#a989e4ef3de3d58c728232fec35655103',1,'nvme_namespace_data']]],
+  ['nlbaf',['nlbaf',['../structnvme__namespace__data.html#aac76013c19f9a965d3d028f1fd84fb74',1,'nvme_namespace_data']]],
+  ['nmic',['nmic',['../structnvme__namespace__data.html#a8ace5a4406bca586e103abea51ab1798',1,'nvme_namespace_data']]],
+  ['ns',['ns',['../structnvme__controller.html#a310df1886c3b071896ab61c92faa352f',1,'nvme_controller']]],
+  ['nsdata',['nsdata',['../structnvme__controller.html#aa33e6e94d09bc58d8a068214335c8099',1,'nvme_controller']]],
+  ['nsfeat',['nsfeat',['../structnvme__namespace__data.html#a2ae1159d2dac5d19f272ff0d18a76911',1,'nvme_namespace_data']]],
+  ['nsze',['nsze',['../structnvme__namespace__data.html#a3a5b99b0ee9ac82b1b926bae35e623b6',1,'nvme_namespace_data']]],
+  ['num_5fchildren',['num_children',['../structnvme__request.html#a01594ed5cd50721bad71f0cb7271c526',1,'nvme_request']]],
+  ['nuse',['nuse',['../structnvme__namespace__data.html#ab16047f2bf58e7976411026bb80657d4',1,'nvme_namespace_data']]],
+  ['nvmcap',['nvmcap',['../structnvme__namespace__data.html#a3a9fa0f5e2e4dd89b840fbb2e63ed84c',1,'nvme_namespace_data']]]
+];
