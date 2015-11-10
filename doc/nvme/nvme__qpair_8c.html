@@ -100,12 +100,12 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac12a4f635f06aa261d5201637bccffea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nvme__qpair_8c.html#ac12a4f635f06aa261d5201637bccffea">nvme_qpair_process_completions</a> (struct <a class="el" href="structnvme__qpair.html">nvme_qpair</a> *qpair)</td></tr>
-<tr class="memdesc:ac12a4f635f06aa261d5201637bccffea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks for and processes completions on the specified qpair.  <a href="#ac12a4f635f06aa261d5201637bccffea">More...</a><br /></td></tr>
-<tr class="separator:ac12a4f635f06aa261d5201637bccffea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd049757f6f28ffe016e15c71994209f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nvme__qpair_8c.html#abd049757f6f28ffe016e15c71994209f">nvme_qpair_process_completions</a> (struct <a class="el" href="structnvme__qpair.html">nvme_qpair</a> *qpair, uint32_t max_completions)</td></tr>
+<tr class="memdesc:abd049757f6f28ffe016e15c71994209f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks for and processes completions on the specified qpair.  <a href="#abd049757f6f28ffe016e15c71994209f">More...</a><br /></td></tr>
+<tr class="separator:abd049757f6f28ffe016e15c71994209f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ac12a4f635f06aa261d5201637bccffea"></a>
+<a class="anchor" id="abd049757f6f28ffe016e15c71994209f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -113,8 +113,18 @@ Functions</h2></td></tr>
           <td class="memname">void nvme_qpair_process_completions </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structnvme__qpair.html">nvme_qpair</a> *&#160;</td>
-          <td class="paramname"><em>qpair</em></td><td>)</td>
+          <td class="paramname"><em>qpair</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>max_completions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -128,7 +138,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 4 2015 14:55:13 for SPDK Userspace NVMe Driver by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 10 2015 09:15:52 for SPDK Userspace NVMe Driver by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
