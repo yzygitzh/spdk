@@ -1,9 +1,147 @@
+<!DOCTYPE html>
 <html>
-<head>
-  <title>SPDK</title>
-</head>
-<body>
-<h1>SPDK</h1>
-<a href="https://github.com/spdk/spdk">SPDK on GitHub</a><br>
-<a href="doc/">Documentation</a>
-</body>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Storage Performance Development Kit : SPDK">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Storage Performance Development Kit</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/spdk/spdk">View on GitHub</a>
+
+          <h1 id="project_title">Storage Performance Development Kit</h1>
+          <h2 id="project_tagline">SPDK</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/spdk/spdk/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/spdk/spdk/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="storage-performance-development-kit" class="anchor" href="#storage-performance-development-kit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Storage Performance Development Kit</h1>
+
+<p>The Storage Performance Development Kit (SPDK) provides a set of tools
+and libraries for writing high performance, scalable, user-mode storage
+applications.
+It achieves high performance by moving all of the necessary drivers into
+userspace and operating in a polled mode instead of relying on interrupts,
+which avoids kernel context switches and eliminates interrupt handling
+overhead.
+The toolkit currently includes an NVMe driver.</p>
+
+<h1>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h1>
+
+<p><a href="https://spdk.github.io/spdk/doc/">Doxygen API documentation</a></p>
+
+<p><a href="PORTING.md">Porting Guide</a></p>
+
+<h1>
+<a id="prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prerequisites</h1>
+
+<p>To build SPDK, some dependencies must be installed.</p>
+
+<p>Fedora/CentOS:</p>
+
+<ul>
+<li>gcc</li>
+<li>libpciaccess-devel</li>
+<li>CUnit-devel</li>
+</ul>
+
+<p>Ubuntu/Debian:</p>
+
+<ul>
+<li>gcc</li>
+<li>libpciaccess-dev</li>
+<li>make</li>
+<li>libcunit1-dev</li>
+</ul>
+
+<p>FreeBSD:</p>
+
+<ul>
+<li>gcc</li>
+<li>libpciaccess</li>
+<li>gmake</li>
+<li>cunit</li>
+</ul>
+
+<p>Additionally, <a href="http://dpdk.org/doc/quick-start">DPDK</a> is required. This is packaged on some Linux distributions, but otherwise:</p>
+
+<pre><code>1) cd /path/to/spdk
+2) wget http://dpdk.org/browse/dpdk/snapshot/dpdk-2.2.0.tar.gz
+3) tar xfz dpdk-2.2.0.tar.gz
+4) cd dpdk-2.2.0
+</code></pre>
+
+<p>Linux:</p>
+
+<pre><code>5) make install T=x86_64-native-linuxapp-gcc
+</code></pre>
+
+<p>FreeBSD:</p>
+
+<pre><code>5) gmake install T=x86_64-native-bsdapp-clang
+</code></pre>
+
+<h1>
+<a id="building" class="anchor" href="#building" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building</h1>
+
+<p>Once the prerequisites are installed, run 'make' within the SPDK directory
+to build the SPDK libraries and examples.</p>
+
+<pre><code>make DPDK_DIR=/path/to/dpdk
+</code></pre>
+
+<p>If you followed the instructions above for building DPDK:</p>
+
+<p>Linux:</p>
+
+<pre><code>make DPDK_DIR=./dpdk-2.2.0/x86_64-native-linuxapp-gcc
+</code></pre>
+
+<p>FreeBSD:</p>
+
+<pre><code>gmake DPDK_DIR=./dpdk-2.2.0/x86_64-native-bsdapp-clang
+</code></pre>
+
+<h1>
+<a id="hugepages-and-device-binding" class="anchor" href="#hugepages-and-device-binding" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hugepages and Device Binding</h1>
+
+<p>Before running an SPDK application, some hugepages must be allocated and
+any NVMe devices must be unbound from the native NVMe kernel driver.
+SPDK includes scripts to automate this process on both Linux and FreeBSD.</p>
+
+<pre><code>1) scripts/configure_hugepages.sh
+2) scripts/unbind_nvme.sh
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Storage Performance Development Kit maintained by <a href="https://github.com/spdk">spdk</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
