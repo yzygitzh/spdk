@@ -33,7 +33,7 @@
 
 SPDK_ROOT_DIR := $(CURDIR)/../../../../..
 
-TEST_FILE = nvme_ns_cmd_ut.c
+#TEST_FILE = nvme_ns_cmd_ut.c
 OTHER_FILES = nvme.c
 
 include $(SPDK_ROOT_DIR)/mk/nvme.unittest.mk
