@@ -308,7 +308,7 @@ int nvme_ns_cmd_write(struct nvme_namespace *ns, void *payload,
 		      void *cb_arg);
 // @yzy
 // new wrap function
-int nvme_ns_cmd_write(struct nvme_namespace *ns, void *payload,
+int nvme_ns_cmd_write_by_id(struct nvme_namespace *ns, void *payload,
 		      uint64_t lba, uint32_t lba_count, nvme_cb_fn_t cb_fn,
 		      void *cb_arg, int ioq_index);
 
@@ -333,7 +333,7 @@ int nvme_ns_cmd_read(struct nvme_namespace *ns, void *payload,
 		     void *cb_arg);
 // @yzy
 // new wrap function
-int nvme_ns_cmd_read(struct nvme_namespace *ns, void *payload,
+int nvme_ns_cmd_read_by_id(struct nvme_namespace *ns, void *payload,
 		     uint64_t lba, uint32_t lba_count, nvme_cb_fn_t cb_fn,
 		     void *cb_arg, int ioq_index);
 
@@ -358,7 +358,7 @@ int nvme_ns_cmd_deallocate(struct nvme_namespace *ns, void *payload,
 			   void *cb_arg);
 // @yzy
 // new wrap function
-int nvme_ns_cmd_deallocate(struct nvme_namespace *ns, void *payload,
+int nvme_ns_cmd_deallocate_by_id(struct nvme_namespace *ns, void *payload,
 			   uint8_t num_ranges, nvme_cb_fn_t cb_fn,
 			   void *cb_arg, int ioq_index);
 
@@ -379,7 +379,7 @@ int nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn,
 		      void *cb_arg);
 // @yzy
 // new wrap function
-int nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn,
+int nvme_ns_cmd_flush_by_id(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn,
 		      void *cb_arg, int ioq_index);
 
 /**
