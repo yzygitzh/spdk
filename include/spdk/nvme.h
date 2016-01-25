@@ -306,6 +306,11 @@ uint32_t nvme_ns_get_flags(struct nvme_namespace *ns);
 int nvme_ns_cmd_write(struct nvme_namespace *ns, void *payload,
 		      uint64_t lba, uint32_t lba_count, nvme_cb_fn_t cb_fn,
 		      void *cb_arg);
+// @yzy
+// new wrap function
+int nvme_ns_cmd_write(struct nvme_namespace *ns, void *payload,
+		      uint64_t lba, uint32_t lba_count, nvme_cb_fn_t cb_fn,
+		      void *cb_arg, int ioq_index);
 
 /**
  * \brief Submits a read I/O to the specified NVMe namespace.
@@ -326,6 +331,11 @@ int nvme_ns_cmd_write(struct nvme_namespace *ns, void *payload,
 int nvme_ns_cmd_read(struct nvme_namespace *ns, void *payload,
 		     uint64_t lba, uint32_t lba_count, nvme_cb_fn_t cb_fn,
 		     void *cb_arg);
+// @yzy
+// new wrap function
+int nvme_ns_cmd_read(struct nvme_namespace *ns, void *payload,
+		     uint64_t lba, uint32_t lba_count, nvme_cb_fn_t cb_fn,
+		     void *cb_arg, int ioq_index);
 
 /**
  * \brief Submits a deallocation request to the specified NVMe namespace.
@@ -346,6 +356,11 @@ int nvme_ns_cmd_read(struct nvme_namespace *ns, void *payload,
 int nvme_ns_cmd_deallocate(struct nvme_namespace *ns, void *payload,
 			   uint8_t num_ranges, nvme_cb_fn_t cb_fn,
 			   void *cb_arg);
+// @yzy
+// new wrap function
+int nvme_ns_cmd_deallocate(struct nvme_namespace *ns, void *payload,
+			   uint8_t num_ranges, nvme_cb_fn_t cb_fn,
+			   void *cb_arg, int ioq_index);
 
 /**
  * \brief Submits a flush request to the specified NVMe namespace.
@@ -362,6 +377,10 @@ int nvme_ns_cmd_deallocate(struct nvme_namespace *ns, void *payload,
  */
 int nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn,
 		      void *cb_arg);
+// @yzy
+// new wrap function
+int nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn,
+		      void *cb_arg, int ioq_index);
 
 /**
  * \brief Get the size, in bytes, of an nvme_request.
