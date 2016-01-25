@@ -286,7 +286,7 @@ nvme_ns_cmd_deallocate_by_id(struct nvme_namespace *ns, void *payload,
 	cmd->cdw10 = num_ranges - 1;
 	cmd->cdw11 = NVME_DSM_ATTR_DEALLOCATE;
 
-	nvme_ctrlr_submit_io_request(ns->ctrlr, req, ioq_index);
+	nvme_ctrlr_submit_io_request_by_id(ns->ctrlr, req, ioq_index);
 
 	return 0;
 }
@@ -314,7 +314,7 @@ nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn, void *cb_arg)
 // @yzy
 // new wrap function
 int
-nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn, void *cb_arg, int ioq_index)
+nvme_ns_cmd_flush_by_id(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn, void *cb_arg, int ioq_index)
 {
 	struct nvme_request	*req;
 	struct nvme_command	*cmd;
@@ -328,7 +328,7 @@ nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn, void *cb_arg, i
 	cmd->opc = NVME_OPC_FLUSH;
 	cmd->nsid = ns->id;
 
-	nvme_ctrlr_submit_io_request(ns->ctrlr, req, ioq_index);
+	nvme_ctrlr_submit_io_request_by_id(ns->ctrlr, req, ioq_index);
 
 	return 0;
 }
