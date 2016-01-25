@@ -354,7 +354,7 @@ submit_single_io(struct ns_worker_ctx *ns_ctx)
 			//rc = nvme_ns_cmd_write(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
 			//		       entry->io_size_blocks, io_complete, task);
 			// @yzy
-			rc = nvme_ns_cmd_write(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
+			rc = nvme_ns_cmd_write_by_id(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
 					       entry->io_size_blocks, io_complete, task, 0);
 		}
 	}
