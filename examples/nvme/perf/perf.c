@@ -342,6 +342,8 @@ submit_single_io(struct ns_worker_ctx *ns_ctx)
 			// @yzy
 			rc = nvme_ns_cmd_read_by_id(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
 					      entry->io_size_blocks, io_complete, task, 0);
+			rc = nvme_ns_cmd_read_by_id(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
+					      entry->io_size_blocks, io_complete, task, 1);
 		}
 	} else {
 #if HAVE_LIBAIO
@@ -356,6 +358,8 @@ submit_single_io(struct ns_worker_ctx *ns_ctx)
 			// @yzy
 			rc = nvme_ns_cmd_write_by_id(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
 					       entry->io_size_blocks, io_complete, task, 0);
+			rc = nvme_ns_cmd_write_by_id(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
+					       entry->io_size_blocks, io_complete, task, 1);
 		}
 	}
 
@@ -403,7 +407,10 @@ check_io(struct ns_worker_ctx *ns_ctx)
 	} else
 #endif
 	{
-		nvme_ctrlr_process_io_completions(ns_ctx->entry->u.nvme.ctrlr, g_max_completions);
+		//nvme_ctrlr_process_io_completions(ns_ctx->entry->u.nvme.ctrlr, g_max_completions);
+		// @yzy
+		nvme_ctrlr_process_io_completions(ns_ctx->entry->u.nvme.ctrlr, g_max_completions, 0);
+		nvme_ctrlr_process_io_completions(ns_ctx->entry->u.nvme.ctrlr, g_max_completions, 1);
 	}
 }
 
