@@ -296,7 +296,7 @@ extern __thread int nvme_thread_ioq_index;
 #define MAX_QUEUE_PER_THREAD 2;
 extern __thread int nvme_thread_ioq_index_array[];
 // new functions
-void	nvme_ctrlr_submit_io_request_by_id(struct nvme_controller *ctrlr,
+int	nvme_ctrlr_submit_io_request_by_id(struct nvme_controller *ctrlr,
 				     struct nvme_request *req, int ioq_index);
 
 
