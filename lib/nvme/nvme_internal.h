@@ -295,10 +295,6 @@ extern __thread int nvme_thread_ioq_index;
 // new ioq_index variables
 #define MAX_QUEUE_PER_THREAD 2
 extern __thread int nvme_thread_ioq_index_array[];
-// new functions
-int	nvme_ctrlr_submit_io_request_by_id(struct nvme_controller *ctrlr,
-				     struct nvme_request *req, int ioq_index);
-
 
 struct nvme_driver {
 	nvme_mutex_t	lock;
@@ -418,6 +414,12 @@ void	nvme_ctrlr_submit_admin_request(struct nvme_controller *ctrlr,
 					struct nvme_request *req);
 void	nvme_ctrlr_submit_io_request(struct nvme_controller *ctrlr,
 				     struct nvme_request *req);
+
+// @yzy
+// new functions
+int	nvme_ctrlr_submit_io_request_by_id(struct nvme_controller *ctrlr,
+				     struct nvme_request *req, int ioq_index);
+
 void	nvme_ctrlr_post_failed_request(struct nvme_controller *ctrlr,
 				       struct nvme_request *req);
 
