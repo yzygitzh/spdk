@@ -312,6 +312,8 @@ submit_single_io(struct ns_worker_ctx *ns_ctx)
 	int			rc;
 	struct ns_entry		*entry = ns_ctx->entry;
 
+	static int queue_chooser = 0;
+
 	if (rte_mempool_get(task_pool, (void **)&task) != 0) {
 		fprintf(stderr, "task_pool rte_mempool_get failed\n");
 		exit(1);
@@ -341,9 +343,8 @@ submit_single_io(struct ns_worker_ctx *ns_ctx)
 			//		      entry->io_size_blocks, io_complete, task);
 			// @yzy
 			rc = nvme_ns_cmd_read_by_id(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
-					      entry->io_size_blocks, io_complete, task, 0);
-			rc = nvme_ns_cmd_read_by_id(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
-					      entry->io_size_blocks, io_complete, task, 1);
+					      entry->io_size_blocks, io_complete, task, queue_chooser);
+			queue_chooser = (queue_chooser + 1) % 2;
 		}
 	} else {
 #if HAVE_LIBAIO
@@ -357,9 +358,8 @@ submit_single_io(struct ns_worker_ctx *ns_ctx)
 			//		       entry->io_size_blocks, io_complete, task);
 			// @yzy
 			rc = nvme_ns_cmd_write_by_id(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
-					       entry->io_size_blocks, io_complete, task, 0);
-			rc = nvme_ns_cmd_write_by_id(entry->u.nvme.ns, task->buf, offset_in_ios * entry->io_size_blocks,
-					       entry->io_size_blocks, io_complete, task, 1);
+					       entry->io_size_blocks, io_complete, task, queue_chooser);
+			queue_chooser = (queue_chooser + 1) % 2;
 		}
 	}
 
