@@ -178,6 +178,23 @@ nvme_ns_cmd_read(struct nvme_namespace *ns, void *payload, uint64_t lba,
 	}
 }
 
+// @yzy
+// new wrap function
+int
+nvme_ns_cmd_read_by_id(struct nvme_namespace *ns, void *payload, uint64_t lba,
+		 uint32_t lba_count, nvme_cb_fn_t cb_fn, void *cb_arg, int ioq_index)
+{
+	struct nvme_request *req;
+
+	req = _nvme_ns_cmd_rw(ns, payload, lba, lba_count, cb_fn, cb_arg, NVME_OPC_READ);
+	if (req != NULL) {
+		nvme_ctrlr_submit_io_request_by_id(ns->ctrlr, req, ioq_index);
+		return 0;
+	} else {
+		return ENOMEM;
+	}
+}
+
 int
 nvme_ns_cmd_write(struct nvme_namespace *ns, void *payload, uint64_t lba,
 		  uint32_t lba_count, nvme_cb_fn_t cb_fn, void *cb_arg)
@@ -187,6 +204,23 @@ nvme_ns_cmd_write(struct nvme_namespace *ns, void *payload, uint64_t lba,
 	req = _nvme_ns_cmd_rw(ns, payload, lba, lba_count, cb_fn, cb_arg, NVME_OPC_WRITE);
 	if (req != NULL) {
 		nvme_ctrlr_submit_io_request(ns->ctrlr, req);
+		return 0;
+	} else {
+		return ENOMEM;
+	}
+}
+
+// @yzy
+// new wrap function
+int
+nvme_ns_cmd_write_by_id(struct nvme_namespace *ns, void *payload, uint64_t lba,
+		  uint32_t lba_count, nvme_cb_fn_t cb_fn, void *cb_arg, int ioq_index)
+{
+	struct nvme_request *req;
+
+	req = _nvme_ns_cmd_rw(ns, payload, lba, lba_count, cb_fn, cb_arg, NVME_OPC_WRITE);
+	if (req != NULL) {
+		nvme_ctrlr_submit_io_request_by_id(ns->ctrlr, req, ioq_index);
 		return 0;
 	} else {
 		return ENOMEM;
@@ -224,6 +258,39 @@ nvme_ns_cmd_deallocate(struct nvme_namespace *ns, void *payload,
 	return 0;
 }
 
+// @yzy
+// new wrap function
+int
+nvme_ns_cmd_deallocate_by_id(struct nvme_namespace *ns, void *payload,
+		       uint8_t num_ranges, nvme_cb_fn_t cb_fn, void *cb_arg, int ioq_index)
+{
+	struct nvme_request	*req;
+	struct nvme_command	*cmd;
+
+	if (num_ranges == 0) {
+		return EINVAL;
+	}
+
+	req = nvme_allocate_request(payload,
+				    num_ranges * sizeof(struct nvme_dsm_range),
+				    cb_fn, cb_arg);
+	if (req == NULL) {
+		return ENOMEM;
+	}
+
+	cmd = &req->cmd;
+	cmd->opc = NVME_OPC_DATASET_MANAGEMENT;
+	cmd->nsid = ns->id;
+
+	/* TODO: create a delete command data structure */
+	cmd->cdw10 = num_ranges - 1;
+	cmd->cdw11 = NVME_DSM_ATTR_DEALLOCATE;
+
+	nvme_ctrlr_submit_io_request(ns->ctrlr, req, ioq_index);
+
+	return 0;
+}
+
 int
 nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn, void *cb_arg)
 {
@@ -243,3 +310,26 @@ nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn, void *cb_arg)
 
 	return 0;
 }
+
+// @yzy
+// new wrap function
+int
+nvme_ns_cmd_flush(struct nvme_namespace *ns, nvme_cb_fn_t cb_fn, void *cb_arg, int ioq_index)
+{
+	struct nvme_request	*req;
+	struct nvme_command	*cmd;
+
+	req = nvme_allocate_request(NULL, 0, cb_fn, cb_arg);
+	if (req == NULL) {
+		return ENOMEM;
+	}
+
+	cmd = &req->cmd;
+	cmd->opc = NVME_OPC_FLUSH;
+	cmd->nsid = ns->id;
+
+	nvme_ctrlr_submit_io_request(ns->ctrlr, req, ioq_index);
+
+	return 0;
+}
+

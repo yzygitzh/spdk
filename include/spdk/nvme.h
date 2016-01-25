@@ -148,6 +148,12 @@ int nvme_ctrlr_cmd_io_raw(struct nvme_controller *ctrlr,
 			  struct nvme_command *cmd,
 			  void *buf, uint32_t len,
 			  nvme_cb_fn_t cb_fn, void *cb_arg);
+// @yzy
+// new wrap function
+int nvme_ctrlr_cmd_io_raw_by_id(struct nvme_controller *ctrlr,
+			  struct nvme_command *cmd,
+			  void *buf, uint32_t len,
+			  nvme_cb_fn_t cb_fn, void *cb_arg, int ioq_index);
 
 /**
  * \brief Process any outstanding completions for I/O submitted on the current thread.
@@ -164,6 +170,9 @@ int nvme_ctrlr_cmd_io_raw(struct nvme_controller *ctrlr,
  *
  */
 void nvme_ctrlr_process_io_completions(struct nvme_controller *ctrlr, uint32_t max_completions);
+// @yzy
+// new function for completion
+void nvme_ctrlr_process_io_completions_by_id(struct nvme_controller *ctrlr, uint32_t max_completions, int ioq_index);
 
 /**
  * \brief Send the given admin command to the NVMe controller.

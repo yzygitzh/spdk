@@ -44,7 +44,9 @@ struct nvme_driver g_nvme_driver = {
 
 int32_t		nvme_retry_count;
 __thread int	nvme_thread_ioq_index = -1;
-
+// @yzy
+// add some more available queue id's
+__thread int	nvme_thread_ioq_index_array[MAX_QUEUE_PER_THREAD];
 
 /**
  * \page nvme_initialization NVMe Initialization
@@ -195,6 +197,23 @@ nvme_allocate_ioq_index(void)
 		nvme_thread_ioq_index = -1;
 	}
 
+	// @yzy
+	// first clear id's to -1
+	for (i = 0; i < MAX_QUEUE_PER_THREAD; i++)
+		nvme_thread_ioq_index_array[i] = -1;
+	// copy origin index to _0
+	nvme_thread_ioq_index_array[0] = nvme_thread_ioq_index;
+	// try to allocate MAX_QUEUE_PER_THREAD - 1 more queue to _1
+	for (i = 1; i < MAX_QUEUE_PER_THREAD; i++){
+		if (driver->ioq_index_pool_next < driver->max_io_queues) {
+			nvme_thread_ioq_index_array[i] = driver->ioq_index_pool[driver->ioq_index_pool_next];
+			driver->ioq_index_pool[driver->ioq_index_pool_next] = -1;
+			driver->ioq_index_pool_next++;
+		} else {
+			nvme_thread_ioq_index_array[i] = -1;
+		}
+	}
+
 	nvme_mutex_unlock(&driver->lock);
 	return 0;
 }
@@ -209,6 +228,15 @@ nvme_free_ioq_index(void)
 		driver->ioq_index_pool_next--;
 		driver->ioq_index_pool[driver->ioq_index_pool_next] = nvme_thread_ioq_index;
 		nvme_thread_ioq_index = -1;
+	}
+	// @yzy
+	// _0 has been freed, try to free _1
+	for (i = 1; i < MAX_QUEUE_PER_THREAD; i++){
+		if (nvme_thread_ioq_index_array[i] >= 0) {
+			driver->ioq_index_pool_next--;
+			driver->ioq_index_pool[driver->ioq_index_pool_next] = nvme_thread_ioq_index_array[i];
+			nvme_thread_ioq_index_array[i] = -1;
+		}
 	}
 	nvme_mutex_unlock(&driver->lock);
 }

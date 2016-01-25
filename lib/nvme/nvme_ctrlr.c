@@ -727,11 +727,47 @@ nvme_ctrlr_submit_io_request(struct nvme_controller *ctrlr,
 	nvme_qpair_submit_request(qpair, req);
 }
 
+// @yzy
+// provide a new submit function (submit by id)
+// return < 0 if invalid arg error
+// return 0 if ok
+int
+nvme_ctrlr_submit_io_request_by_id(struct nvme_controller *ctrlr,
+			     struct nvme_request *req, int ioq_index)
+{
+	struct nvme_qpair       *qpair;
+
+	if (ioq_index + 1 > MAX_QUEUE_PER_THREAD)
+		return -1;
+	if (nvme_thread_ioq_index_array[ioq_index] < 0)
+		return -2;
+
+	qpair = &ctrlr->ioq[nvme_thread_ioq_index_array[ioq_index]];
+	nvme_qpair_submit_request(qpair, req);
+	return 0;
+}
+
 void
 nvme_ctrlr_process_io_completions(struct nvme_controller *ctrlr, uint32_t max_completions)
 {
 	nvme_assert(nvme_thread_ioq_index >= 0, ("no ioq_index assigned for thread\n"));
 	nvme_qpair_process_completions(&ctrlr->ioq[nvme_thread_ioq_index], max_completions);
+}
+
+// @yzy
+// provide a new submit function (submit by id)
+// return < 0 if error
+// return 0 if ok
+int
+nvme_ctrlr_process_io_completions_by_id(struct nvme_controller *ctrlr, uint32_t max_completions, int ioq_index)
+{
+	if (ioq_index + 1 > MAX_QUEUE_PER_THREAD)
+		return -1;
+	if (nvme_thread_ioq_index_array[ioq_index] < 0)
+		return -2;
+
+	nvme_qpair_process_completions(&ctrlr->ioq[nvme_thread_ioq_index_array[ioq_index]], max_completions);
+	return 0;
 }
 
 void

@@ -53,6 +53,27 @@ nvme_ctrlr_cmd_io_raw(struct nvme_controller *ctrlr,
 	return 0;
 }
 
+// @yzy
+// new wrap function
+int
+nvme_ctrlr_cmd_io_raw_by_id(struct nvme_controller *ctrlr,
+		      struct nvme_command *cmd,
+		      void *buf, uint32_t len,
+		      nvme_cb_fn_t cb_fn, void *cb_arg, int ioq_index)
+{
+	struct nvme_request	*req;
+
+	req = nvme_allocate_request(buf, len, cb_fn, cb_arg);
+
+	if (req == NULL) {
+		return ENOMEM;
+	}
+
+	memcpy(&req->cmd, cmd, sizeof(req->cmd));
+
+	return nvme_ctrlr_submit_io_request_by_id(ctrlr, req, ioq_index);
+}
+
 int
 nvme_ctrlr_cmd_admin_raw(struct nvme_controller *ctrlr,
 			 struct nvme_command *cmd,
