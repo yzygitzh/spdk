@@ -231,6 +231,7 @@ nvme_free_ioq_index(void)
 	}
 	// @yzy
 	// _0 has been freed, try to free _1
+	uint32_t i;
 	for (i = 1; i < MAX_QUEUE_PER_THREAD; i++){
 		if (nvme_thread_ioq_index_array[i] >= 0) {
 			driver->ioq_index_pool_next--;
