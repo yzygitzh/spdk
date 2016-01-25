@@ -409,8 +409,8 @@ check_io(struct ns_worker_ctx *ns_ctx)
 	{
 		//nvme_ctrlr_process_io_completions(ns_ctx->entry->u.nvme.ctrlr, g_max_completions);
 		// @yzy
-		nvme_ctrlr_process_io_completions(ns_ctx->entry->u.nvme.ctrlr, g_max_completions, 0);
-		nvme_ctrlr_process_io_completions(ns_ctx->entry->u.nvme.ctrlr, g_max_completions, 1);
+		nvme_ctrlr_process_io_completions_by_id(ns_ctx->entry->u.nvme.ctrlr, g_max_completions, 0);
+		nvme_ctrlr_process_io_completions_by_id(ns_ctx->entry->u.nvme.ctrlr, g_max_completions, 1);
 	}
 }
 
