@@ -293,7 +293,7 @@ extern __thread int nvme_thread_ioq_index;
 
 // @yzy
 // new ioq_index variables
-#define MAX_QUEUE_PER_THREAD 2
+#define MAX_QUEUE_PER_THREAD 31
 extern __thread int nvme_thread_ioq_index_array[];
 
 struct nvme_driver {
